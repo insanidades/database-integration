@@ -1,5 +1,6 @@
-var express = require('express');
-var route = express.Router();
+const express = require('express');
+const route = express.Router();
+const livroDao = require("../modelo/livro-dao")
 
 var { obterLivros, incluir, excluir } = require('../modelo/livro-dao');
 
@@ -11,7 +12,7 @@ route.get("/", async (req, res) => {
 route.post("/", async (req, res) => {
   try {
     await livroDao.incluir(req.body);
-    res.json({ mensagem: "Livro incluído com sucesso" });
+    res.json({ mensagem: "Inclusao efetuada" });
   } catch (err) {
     res.json({ mensagem: "Erro ao incluir livro" });
   }
@@ -21,7 +22,7 @@ route.delete("/:id", async (req, res) => {
   try {
     const codigo = req.params.id;
     await livroDao.excluir(codigo);
-    res.json({ mensagem: "Livro excluído com sucesso" });
+    res.json({ mensagem: "Exclusao efetuada" });
   } catch (err) {
     res.json({ mensagem: "Erro ao excluir livro" });
   }
